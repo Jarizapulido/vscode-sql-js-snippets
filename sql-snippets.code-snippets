@@ -1,0 +1,279 @@
+{
+	"SQL - Create Table SQLite": {
+		"prefix": "sql-table-sqlite",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} ${3:INTEGER} PRIMARY KEY AUTOINCREMENT,",
+			"    ${4:name} ${5:TEXT} NOT NULL,",
+			"    ${6:email} ${7:TEXT},",
+			"    ${8:age} ${9:INTEGER},",
+			"    ${10:price} ${11:REAL},",
+			"    ${12:is_active} ${13:INTEGER} DEFAULT 1,",
+			"    ${14:created_at} ${15:DATETIME} DEFAULT CURRENT_TIMESTAMP",
+			");"
+		],
+		"description": "Create table SQLite con tipos personalizables"
+	},
+	"SQL - Create Table MySQL": {
+		"prefix": "sql-table-mysql",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} ${3:INT} AUTO_INCREMENT PRIMARY KEY,",
+			"    ${4:name} ${5:VARCHAR(255)} NOT NULL,",
+			"    ${6:email} ${7:VARCHAR(255)},",
+			"    ${8:description} ${9:TEXT},",
+			"    ${10:age} ${11:INT},",
+			"    ${12:price} ${13:DECIMAL(10,2)},",
+			"    ${14:is_active} ${15:BOOLEAN} DEFAULT TRUE,",
+			"    ${16:created_at} ${17:TIMESTAMP} DEFAULT CURRENT_TIMESTAMP",
+			") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+		],
+		"description": "Create table MySQL con tipos personalizables"
+	},
+	"SQL - Create Table PostgreSQL": {
+		"prefix": "sql-table-pg",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} ${3:SERIAL} PRIMARY KEY,",
+			"    ${4:name} ${5:VARCHAR(255)} NOT NULL,",
+			"    ${6:email} ${7:VARCHAR(255)},",
+			"    ${8:description} ${9:TEXT},",
+			"    ${10:age} ${11:INTEGER},",
+			"    ${12:price} ${13:DECIMAL(10,2)},",
+			"    ${14:is_active} ${15:BOOLEAN} DEFAULT TRUE,",
+			"    ${16:created_at} ${17:TIMESTAMP} DEFAULT CURRENT_TIMESTAMP",
+			");"
+		],
+		"description": "Create table PostgreSQL con tipos personalizables"
+	},
+	"SQL - Create Table Custom": {
+		"prefix": "sql-table-custom",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} ${3:INTEGER} PRIMARY KEY,",
+			"    ${4:column1} ${5:TEXT},",
+			"    ${6:column2} ${7:INTEGER},",
+			"    ${8:column3} ${9:REAL},",
+			"    ${10:column4} ${11:DATE}",
+			");"
+		],
+		"description": "Create table con columnas personalizables"
+	},
+	"SQL - Insert Single": {
+		"prefix": "sql-insert",
+		"body": [
+			"INSERT INTO ${1:table_name} (${2:column1}, ${3:column2}, ${4:column3})",
+			"VALUES (${5:value1}, ${6:value2}, ${7:value3});"
+		],
+		"description": "Insertar un registro"
+	},
+	"SQL - Insert Multiple": {
+		"prefix": "sql-insert-multi",
+		"body": [
+			"INSERT INTO ${1:table_name} (${2:column1}, ${3:column2})",
+			"VALUES",
+			"    (${4:value1a}, ${5:value1b}),",
+			"    (${6:value2a}, ${7:value2b}),",
+			"    (${8:value3a}, ${9:value3b});"
+		],
+		"description": "Insertar múltiples registros"
+	},
+	"SQL - PostgreSQL Function Basic": {
+		"prefix": "sql-func-pg",
+		"body": [
+			"CREATE OR REPLACE FUNCTION ${1:function_name}(",
+			"    ${2:param1} ${3:INTEGER},",
+			"    ${4:param2} ${5:VARCHAR}",
+			")",
+			"RETURNS ${6:INTEGER} AS $$",
+			"BEGIN",
+			"    ${7:-- tu lógica aquí}",
+			"    RETURN ${8:result};",
+			"END;",
+			"$$ LANGUAGE plpgsql;"
+		],
+		"description": "Función PostgreSQL básica"
+	},
+	"SQL - PostgreSQL Function Return Table": {
+		"prefix": "sql-func-pg-table",
+		"body": [
+			"CREATE OR REPLACE FUNCTION ${1:function_name}(",
+			"    ${2:param} ${3:INTEGER}",
+			")",
+			"RETURNS TABLE(",
+			"    ${4:id} INTEGER,",
+			"    ${5:name} VARCHAR,",
+			"    ${6:created_at} TIMESTAMP",
+			") AS $$",
+			"BEGIN",
+			"    RETURN QUERY",
+			"    SELECT ${7:t.id}, ${8:t.name}, ${9:t.created_at}",
+			"    FROM ${10:table_name} t",
+			"    WHERE ${11:t.id} = $1;",
+			"END;",
+			"$$ LANGUAGE plpgsql;"
+		],
+		"description": "Función PostgreSQL que retorna tabla"
+	},
+	"SQL - PostgreSQL Function Return Set": {
+		"prefix": "sql-func-pg-set",
+		"body": [
+			"CREATE OR REPLACE FUNCTION ${1:function_name}()",
+			"RETURNS SETOF ${2:table_name} AS $$",
+			"BEGIN",
+			"    RETURN QUERY SELECT * FROM ${3:table_name} WHERE ${4:condition};",
+			"END;",
+			"$$ LANGUAGE plpgsql;"
+		],
+		"description": "Función PostgreSQL que retorna conjunto de resultados"
+	},
+	"SQL - Inner Join": {
+		"prefix": "sql-inner-join",
+		"body": [
+			"SELECT ${1:a.column1}, ${2:a.column2}, ${3:b.column1}",
+			"FROM ${4:table_a} a",
+			"INNER JOIN ${5:table_b} b ON ${6:a.id} = ${7:b.id};"
+		],
+		"description": "Inner Join"
+	},
+	"SQL - Left Join": {
+		"prefix": "sql-left-join",
+		"body": [
+			"SELECT ${1:a.column1}, ${2:a.column2}, ${3:b.column1}",
+			"FROM ${4:table_a} a",
+			"LEFT JOIN ${5:table_b} b ON ${6:a.id} = ${7:b.id};"
+		],
+		"description": "Left Join"
+	},
+	"SQL - Right Join": {
+		"prefix": "sql-right-join",
+		"body": [
+			"SELECT ${1:a.column1}, ${2:a.column2}, ${3:b.column1}",
+			"FROM ${4:table_a} a",
+			"RIGHT JOIN ${5:table_b} b ON ${6:a.id} = ${7:b.id};"
+		],
+		"description": "Right Join"
+	},
+	"SQL - Full Outer Join": {
+		"prefix": "sql-full-join",
+		"body": [
+			"SELECT ${1:a.column1}, ${2:a.column2}, ${3:b.column1}",
+			"FROM ${4:table_a} a",
+			"FULL OUTER JOIN ${5:table_b} b ON ${6:a.id} = ${7:b.id};"
+		],
+		"description": "Full Outer Join"
+	},
+	"SQL - Multiple Joins (3 tablas)": {
+		"prefix": "sql-join-3",
+		"body": [
+			"SELECT",
+			"    ${1:a.column1},",
+			"    ${2:b.column1},",
+			"    ${3:c.column1}",
+			"FROM ${4:table_a} a",
+			"INNER JOIN ${5:table_b} b ON ${6:a.id} = ${7:b.id}",
+			"INNER JOIN ${8:table_c} c ON ${9:b.id} = ${10:c.id};"
+		],
+		"description": "Join con 3 tablas"
+	},
+	"SQL - Multiple Joins (4 tablas)": {
+		"prefix": "sql-join-4",
+		"body": [
+			"SELECT",
+			"    ${1:a.column1},",
+			"    ${2:b.column1},",
+			"    ${3:c.column1},",
+			"    ${4:d.column1}",
+			"FROM ${5:table_a} a",
+			"INNER JOIN ${6:table_b} b ON ${7:a.id} = ${8:b.id}",
+			"INNER JOIN ${9:table_c} c ON ${10:b.id} = ${11:c.id}",
+			"INNER JOIN ${12:table_d} d ON ${13:c.id} = ${14:d.id};"
+		],
+		"description": "Join con 4 tablas"
+	},
+	"SQL - Join with WHERE": {
+		"prefix": "sql-join-where",
+		"body": [
+			"SELECT ${1:a.*}, ${2:b.*}",
+			"FROM ${3:table_a} a",
+			"INNER JOIN ${4:table_b} b ON ${5:a.id} = ${6:b.id}",
+			"WHERE ${7:a.status} = '${8:active}'",
+			"ORDER BY ${9:a.created_at} DESC;"
+		],
+		"description": "Join con condición WHERE"
+	},
+	"SQL - Tabla Intermedia SQLite": {
+		"prefix": "sql-junction-sqlite",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} INTEGER PRIMARY KEY AUTOINCREMENT,",
+			"    ${3:table_a_id} INTEGER NOT NULL,",
+			"    ${4:table_b_id} INTEGER NOT NULL,",
+			"    ${5:created_at} DATETIME DEFAULT CURRENT_TIMESTAMP,",
+			"    FOREIGN KEY (${6:table_a_id}) REFERENCES ${7:table_a}(id),",
+			"    FOREIGN KEY (${8:table_b_id}) REFERENCES ${9:table_b}(id),",
+			"    UNIQUE(${10:table_a_id}, ${11:table_b_id})",
+			");"
+		],
+		"description": "Tabla intermedia SQLite con Foreign Keys"
+	},
+	"SQL - Tabla Intermedia MySQL": {
+		"prefix": "sql-junction-mysql",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} INT AUTO_INCREMENT PRIMARY KEY,",
+			"    ${3:table_a_id} INT NOT NULL,",
+			"    ${4:table_b_id} INT NOT NULL,",
+			"    ${5:created_at} TIMESTAMP DEFAULT CURRENT_TIMESTAMP,",
+			"    FOREIGN KEY (${6:table_a_id}) REFERENCES ${7:table_a}(id) ON DELETE CASCADE,",
+			"    FOREIGN KEY (${8:table_b_id}) REFERENCES ${9:table_b}(id) ON DELETE CASCADE,",
+			"    UNIQUE KEY ${10:unique_name} (${11:table_a_id}, ${12:table_b_id})",
+			") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+		],
+		"description": "Tabla intermedia MySQL con Foreign Keys"
+	},
+	"SQL - Tabla Intermedia PostgreSQL": {
+		"prefix": "sql-junction-pg",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} SERIAL PRIMARY KEY,",
+			"    ${3:table_a_id} INTEGER NOT NULL,",
+			"    ${4:table_b_id} INTEGER NOT NULL,",
+			"    ${5:created_at} TIMESTAMP DEFAULT CURRENT_TIMESTAMP,",
+			"    FOREIGN KEY (${6:table_a_id}) REFERENCES ${7:table_a}(id) ON DELETE CASCADE,",
+			"    FOREIGN KEY (${8:table_b_id}) REFERENCES ${9:table_b}(id) ON DELETE CASCADE,",
+			"    UNIQUE (${10:table_a_id}, ${11:table_b_id})",
+			");"
+		],
+		"description": "Tabla intermedia PostgreSQL con Foreign Keys"
+	},
+	"SQL - Tabla Intermedia con atributos extra": {
+		"prefix": "sql-junction-extra",
+		"body": [
+			"CREATE TABLE ${1:table_name} (",
+			"    ${2:id} ${3:SERIAL} PRIMARY KEY,",
+			"    ${4:table_a_id} ${5:INTEGER} NOT NULL,",
+			"    ${6:table_b_id} ${7:INTEGER} NOT NULL,",
+			"    ${8:role} ${9:VARCHAR(50)},",
+			"    ${10:is_active} ${11:BOOLEAN} DEFAULT TRUE,",
+			"    ${12:created_at} ${13:TIMESTAMP} DEFAULT CURRENT_TIMESTAMP,",
+			"    FOREIGN KEY (${14:table_a_id}) REFERENCES ${15:table_a}(id) ON DELETE CASCADE,",
+			"    FOREIGN KEY (${16:table_b_id}) REFERENCES ${17:table_b}(id) ON DELETE CASCADE",
+			");"
+		],
+		"description": "Tabla intermedia con atributos adicionales"
+	},
+	"SQL - Many-to-Many Join Query": {
+		"prefix": "sql-many-to-many",
+		"body": [
+			"SELECT",
+			"    a.${1:name},",
+			"    b.${2:title}",
+			"FROM ${3:table_a} a",
+			"INNER JOIN ${4:junction_table} j ON a.${5:id} = j.${6:table_a_id}",
+			"INNER JOIN ${7:table_b} b ON j.${8:table_b_id} = b.${9:id}",
+			"WHERE ${10:a.id} = ${11:1};"
+		],
+		"description": "Consulta many-to-many con tabla intermedia"
+	}
+}

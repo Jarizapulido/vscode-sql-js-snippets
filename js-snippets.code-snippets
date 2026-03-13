@@ -1,0 +1,142 @@
+{
+	"JS - Fetch GET": {
+		"prefix": "js-fetch-get",
+		"body": [
+			"fetch('${1:https://api.example.com/data}')",
+			"    .then(response => response.json())",
+			"    .then(data => ${2:console.log(data)})",
+			"    .catch(error => ${3:console.error(error)});"
+		],
+		"description": "Fetch GET request básico"
+	},
+	"JS - Fetch GET Async/Await": {
+		"prefix": "js-fetch-get-async",
+		"body": [
+			"const ${1:fetchData} = async () => {",
+			"    try {",
+			"        const response = await fetch('${2:https://api.example.com/data}');",
+			"        const data = await response.json();",
+			"        ${3:return data};",
+			"    } catch (error) {",
+			"        ${4:console.error(error)};",
+			"    }",
+			"};"
+		],
+		"description": "Fetch GET con async/await"
+	},
+	"JS - Fetch POST": {
+		"prefix": "js-fetch-post",
+		"body": [
+			"fetch('${1:https://api.example.com/data}', {",
+			"    method: 'POST',",
+			"    headers: {",
+			"        'Content-Type': 'application/json'",
+			"    },",
+			"    body: JSON.stringify(${2:{ name: 'value' }})",
+			"})",
+			"    .then(response => response.json())",
+			"    .then(data => ${3:console.log(data)})",
+			"    .catch(error => ${4:console.error(error)});"
+		],
+		"description": "Fetch POST request"
+	},
+	"JS - Fetch POST Async/Await": {
+		"prefix": "js-fetch-post-async",
+		"body": [
+			"const ${1:postData} = async () => {",
+			"    try {",
+			"        const response = await fetch('${2:https://api.example.com/data}', {",
+			"            method: 'POST',",
+			"            headers: {",
+			"                'Content-Type': 'application/json'",
+			"            },",
+			"            body: JSON.stringify(${3:{ key: 'value' }})",
+			"        });",
+			"        const data = await response.json();",
+			"        ${4:return data};",
+			"    } catch (error) {",
+			"        ${5:console.error(error)};",
+			"    }",
+			"};"
+		],
+		"description": "Fetch POST con async/await"
+	},
+	"JS - Fetch PUT": {
+		"prefix": "js-fetch-put",
+		"body": [
+			"fetch('${1:https://api.example.com/data}/${2:id}', {",
+			"    method: 'PUT',",
+			"    headers: {",
+			"        'Content-Type': 'application/json'",
+			"    },",
+			"    body: JSON.stringify(${3:{ name: 'updated' }})",
+			"})",
+			"    .then(response => response.json())",
+			"    .then(data => ${4:console.log(data)})",
+			"    .catch(error => ${5:console.error(error)});"
+		],
+		"description": "Fetch PUT request"
+	},
+	"JS - Fetch DELETE": {
+		"prefix": "js-fetch-delete",
+		"body": [
+			"fetch('${1:https://api.example.com/data}/${2:id}', {",
+			"    method: 'DELETE'",
+			"})",
+			"    .then(response => response.json())",
+			"    .then(data => ${3:console.log(data)})",
+			"    .catch(error => ${4:console.error(error)});"
+		],
+		"description": "Fetch DELETE request"
+	},
+	"JS - Fetch with Headers": {
+		"prefix": "js-fetch-headers",
+		"body": [
+			"fetch('${1:https://api.example.com/data}', {",
+			"    method: '${2:GET}',",
+			"    headers: {",
+			"        'Authorization': 'Bearer ${3:token}',",
+			"        'Content-Type': 'application/json'",
+			"    }",
+			"})",
+			"    .then(response => response.json())",
+			"    .then(data => ${4:console.log(data)})",
+			"    .catch(error => ${5:console.error(error)});"
+		],
+		"description": "Fetch con headers personalizados"
+	},
+	"JS - Fetch with Error Handling": {
+		"prefix": "js-fetch-error",
+		"body": [
+			"const ${1:fetchData} = async (${2:url}) => {",
+			"    const response = await fetch(${2:url});",
+			"    if (!response.ok) {",
+			"        throw new Error(`HTTP error! status: ${3:response.status}`);",
+			"    }",
+			"    return await response.json();",
+			"};"
+		],
+		"description": "Fetch con manejo de errores de HTTP"
+	},
+	"JS - Fetch Abort/Timeout": {
+		"prefix": "js-fetch-abort",
+		"body": [
+			"const ${1:fetchWithTimeout} = async (${2:url}, ${3:timeout} = 5000) => {",
+			"    const controller = new AbortController();",
+			"    const id = setTimeout(() => controller.abort(), ${3:timeout});",
+			"    ",
+			"    try {",
+			"        const response = await fetch(${2:url}, {",
+			"            signal: controller.signal",
+			"        });",
+			"        clearTimeout(id);",
+			"        return await response.json();",
+			"    } catch (error) {",
+			"        clearTimeout(id);",
+			"        throw error;",
+			"    }",
+			"};"
+		],
+		"description": "Fetch con timeout y abort"
+	}
+}

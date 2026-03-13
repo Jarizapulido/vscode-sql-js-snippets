@@ -1,0 +1,54 @@
+{
+	"JS - Fetch SQL PlanetScale": {
+		"prefix": "js-fetch-sql",
+		"body": [
+			"fetch(${1:url}, {",
+			"    method: 'POST',",
+			"    headers: {",
+			"        Authorization: `Bearer \\${${2:authToken}}`,",
+			"        'Content-Type': 'application/json'",
+			"    },",
+			"    body: JSON.stringify({",
+			"        requests: [",
+			"            { type: 'execute', stmt: { sql: ${3:SELECT * FROM table} } },",
+			"            { type: 'close' }",
+			"        ]",
+			"    })",
+			"})",
+			"    .then(res => res.json())",
+			"    .then(${4:data} => {",
+			"        console.log(${4:data}.results[0].response.result.rows)",
+			"        ${5:data}.results[0].response.result.rows.forEach(${6:item} => ${7:createItem(${6:item})})",
+			"    })",
+			"    .catch(err => console.log(err));"
+		],
+		"description": "Fetch SQL para PlanetScale/Hypercorn"
+	},
+	"JS - Fetch SQL Async/Await": {
+		"prefix": "js-fetch-sql-async",
+		"body": [
+			"const ${1:fetchSql} = async (${2:url}, ${3:authToken}, ${4:sql}) => {",
+			"    try {",
+			"        const response = await fetch(${2:url}, {",
+			"            method: 'POST',",
+			"            headers: {",
+			"                Authorization: `Bearer \\${${3:authToken}}`,",
+			"                'Content-Type': 'application/json'",
+			"            },",
+			"            body: JSON.stringify({",
+			"                requests: [",
+			"                    { type: 'execute', stmt: { sql: ${4:sql} } },",
+			"                    { type: 'close' }",
+			"                ]",
+			"            })",
+			"        });",
+			"        const data = await response.json();",
+			"        return ${5:data}.results[0].response.result.rows;",
+			"    } catch (error) {",
+			"        console.error(error);",
+			"    }",
+			"};"
+		],
+		"description": "Fetch SQL con async/await"
+	}
+}
