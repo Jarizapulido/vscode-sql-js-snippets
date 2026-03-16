@@ -138,5 +138,47 @@
 			"};"
 		],
 		"description": "Fetch con timeout y abort"
+	},
+	"HTML - Formulario básico": {
+		"prefix": "html-form",
+		"body": [
+			"<form id=\"${1:mi-form}\">",
+			"    <label>${2:Campo}: <input type=\"${3:text}\" name=\"${4:campo}\" required></label>",
+			"    <input type=\"submit\" value=\"${5:Enviar}\">",
+			"</form>",
+			"<pre id=\"${6:resultado}\"></pre>"
+		],
+		"description": "HTML formulario básico"
+	},
+	"JS - Form POST con Fetch": {
+		"prefix": "js-form-post",
+		"body": [
+			"document.getElementById(\"${1:mi-form}\").addEventListener(\"submit\", (e) => {",
+			"    e.preventDefault();",
+			"    const formData = new FormData(e.target);",
+			"    const data = Object.fromEntries(formData);",
+			"    fetch(\"${2:/endpoint}\", {",
+			"        method: \"POST\",",
+			"        headers: { \"Content-Type\": \"application/json\" },",
+			"        body: JSON.stringify(data)",
+			"    })",
+			"    .then(res => res.json())",
+			"    .then(result => {",
+			"        document.getElementById(\"${3:resultado}\").textContent = JSON.stringify(result);",
+			"    });",
+			"});"
+		],
+		"description": "Formulario POST con fetch"
+	},
+	"JS - Form GET con Fetch": {
+		"prefix": "js-form-get",
+		"body": [
+			"fetch(\"${1:/endpoint}\")",
+			"    .then(res => res.json())",
+			"    .then(data => {",
+			"        document.getElementById(\"${2:resultado}\").textContent = JSON.stringify(data, null, 2);",
+			"    });"
+		],
+		"description": "GET request con fetch"
 	}
 }
