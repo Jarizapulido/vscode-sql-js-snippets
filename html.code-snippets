@@ -1,0 +1,29 @@
+{
+	"HTML - Formulario básico": {
+		"prefix": "html-form",
+		"body": [
+			"<form id=\"${1:mi-form}\">",
+			"    <label>${2:Campo}: <input type=\"${3:text}\" name=\"${4:campo}\" required></label>",
+			"    <input type=\"submit\" value=\"${5:Enviar}\">",
+			"</form>",
+			"<pre id=\"${6:resultado}\"></pre>"
+		],
+		"description": "HTML formulario básico"
+	},
+	"HTML - Tabla": {
+		"prefix": "html-table",
+		"body": [
+			"<table id=\"${1:mi-tabla}\">",
+			"    <thead>",
+			"        <tr>",
+			"            <th>${2:Columna 1}</th>",
+			"            <th>${3:Columna 2}</th>",
+			"        </tr>",
+			"    </thead>",
+			"    <tbody id=\"${4:mi-tabla-body}\">",
+			"    </tbody>",
+			"</table>"
+		],
+		"description": "HTML tabla básica"
+	}
+}
