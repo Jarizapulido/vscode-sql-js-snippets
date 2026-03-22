@@ -182,23 +182,22 @@
 		"description": "GET request con fetch"
 	},
 	"JS - Generar tabla desde JSON": {
-		"prefix": "js-table-generate",
+		"prefix": "js-table",
 		"body": [
-			"const tableBody = document.querySelector(\"#${1:mi-tabla}\");",
+			"const data = ${1:[{ campo1: 'dato1', campo2: 'dato2' }]};",
+			"const tableBody = document.querySelector(\"#${2:tabla}\");",
 			"",
-			"function createRow(${2:item}) {",
+			"data.forEach(item => {",
 			"    const tr = document.createElement(\"tr\");",
 			"    ",
-			"    const td1 = document.createElement(\"td\");",
-			"    td1.textContent = ${2:item}.${3:campo1};",
+			"    Object.values(item).forEach(value => {",
+			"        const td = document.createElement(\"td\");",
+			"        td.textContent = value;",
+			"        tr.appendChild(td);",
+			"    });",
 			"    ",
-			"    const td2 = document.createElement(\"td\");",
-			"    td2.textContent = ${2:item}.${4:campo2};",
-			"    ",
-			"    tr.appendChild(td1);",
-			"    tr.appendChild(td2);",
 			"    tableBody.appendChild(tr);",
-			"}"
+			"});"
 		],
 		"description": "Generar tabla desde array de objetos"
 	}
